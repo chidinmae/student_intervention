@@ -11852,7 +11852,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Calculate number of students</span>
@@ -11862,10 +11862,10 @@ div#notebook {
 <span class="n">n_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
 
 <span class="c1"># TODO: Calculate passing students</span>
-<span class="n">n_passed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="p">[</span><span class="n">student_data</span><span class="p">[</span><span class="s2">&quot;passed&quot;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;yes&quot;</span><span class="p">])</span>
+<span class="n">n_passed</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">passed</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">)</span>
 
 <span class="c1"># TODO: Calculate failing students</span>
-<span class="n">n_failed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="p">[</span><span class="n">student_data</span><span class="p">[</span><span class="s2">&quot;passed&quot;</span><span class="p">]</span><span class="o">==</span><span class="s2">&quot;no&quot;</span><span class="p">])</span>
+<span class="n">n_failed</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">passed</span> <span class="o">==</span> <span class="s1">&#39;no&#39;</span><span class="p">)</span>
 
 <span class="c1"># TODO: Calculate graduation rate</span>
 <span class="n">grad_rate</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n_passed</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">n_students</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
@@ -11915,7 +11915,7 @@ Graduation rate of the class: 67.09%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Extract feature columns</span>
@@ -11997,7 +11997,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_features</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
@@ -12068,7 +12068,7 @@ Feature values:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import any additional functionality you may need here</span>
@@ -12149,19 +12149,20 @@ Testing set has 95 samples.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong></p>
+<p><strong>Answer: </strong>
+Based on the diagram here, <a href="http://scikit-learn.org/stable/tutorial/machine_learning_map/">http://scikit-learn.org/stable/tutorial/machine_learning_map/</a>, I chose Linear SVC as the first model following along the path (&gt;50 samples -&gt; predicting a category -&gt; labeled data -&gt; &lt; 100K samples). I then chose Naive Bayes because that is also suggested along the path. Lastly I chose SGD Classifier which is recommended for data with &gt;100K samples to compare with the other two.</p>
 <ol>
-<li><p>Logistic Regression
-<em>Logistic regression can be used in A/B testing to measure user reactions to new features, example <a href="http://nerds.airbnb.com/experiments-at-airbnb/">http://nerds.airbnb.com/experiments-at-airbnb/</a></em>Logistic regressions has strengths with categorical outcomes and measuring the influence of independent variables on dependent variables.
-<em>Logistic Regression weakness is that input variable selection is very important. Variables that are not truly independent of each other or variables that have weak predictive value for the outcome will greatly affect the model.</em>This model is a good candidate for the problem because the outcome is categorical and the input variables do appear to have some predictive value for the outcome, so there may be a linear relationship between the data that Logistic Regression can exploit.</p>
+<li><p>Linear Support Vector Classification
+<em>Linear Support Vector Machines work well with classifying binary data. An example of using Linear SVM in the real world is identifying grapevine variety <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4658183/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4658183/</a></em>Linear SVM has strengths when the data falls into well-defined groups.
+<em>Linear SVM weakness is when the groups are not easily linearily separable, must use a kernel trick in that case.</em>This model is a good candidate for the problem because the outcome is binary and there may be a linear line of separation between the data that Logistic Regression can exploit to separate the groups.</p>
 </li>
-<li><p>Gradient Boosting
-<em>In industry, gradient boosting can be used to identify customers based on a classification criteria, example <a href="http://info.salford-systems.com/predicting-customer-churn-with-gradient-boosting">http://info.salford-systems.com/predicting-customer-churn-with-gradient-boosting</a></em>The strengths of gradient boosting is that it uses many weak learners in combination to form a strong learner, it also penalizes against overfitting by reducing complexity.
-<em>The weakness of gradient boosting is that the learners can be susceptible to oversampling of outliers and other noise in the data.</em>This model is a good candidate for gradient boosting because there are a variety of variables to use to create an ensemble of weak learners.</p>
+<li><p>Naive Bayes
+<em>In industry, Naive Bayes can be used to identify email as spam, <a href="https://www.quora.com/In-what-real-world-applications-is-Naive-Bayes-classifier-used">https://www.quora.com/In-what-real-world-applications-is-Naive-Bayes-classifier-used</a></em>The strengths of Naive Bayes is that it considers many hypotheses about the data and then strengthens the more reasonable hypotheses. This works well for small data because the complexity is relatively low. 
+<em>A weakness of Naive Bayes is the assumption of independence among features. Correlated features throw off the model.</em>This model is a good candidate because the data is small in each of the three trials.</p>
 </li>
-<li><p>K-Nearest Neighbors
-<em>K-Nearest Neighbors can be used in search recommenders to recommend items to users, reference <a href="https://www.quora.com/What-are-industry-applications-of-the-K-nearest-neighbor-algorithm">https://www.quora.com/What-are-industry-applications-of-the-K-nearest-neighbor-algorithm</a></em>K-Nearest Neighbors has strengths with categorical data that is very discrete and provides a low complexity alogirthm that makes local approximation among like data.
-<em>K-Nearest Neighbors has weaknesses when the data is ambiguous and the categories are not well defined.</em>I think K-Nearest Neighbors will be a good model for this data on the hypothesis that students who do not pass are similar to each other and students who do pass are similar to each other in a different way.</p>
+<li><p>Linear SVM with Stochastic Gradient Descent Training
+<em>Stochastic Gradient Descent can be used to evaluate employee contribution <a href="http://iosrjournals.org/iosr-jbm/papers/Vol16-issue6/Version-3/I016637780.pdf">http://iosrjournals.org/iosr-jbm/papers/Vol16-issue6/Version-3/I016637780.pdf</a></em>A strength of Stochastic Gradient Descent is that it is a simplification of the Gradient Descent algorithm that makes it more efficient to run on large data.
+<em>A weakness is that Stochastic Gradient Descent is susceptible to local minima/maxima if the data is not large enough.</em>I think Stochastic Gradient descent is suited to this data because I am choosing to use a Linear SVM with stochastic gradient training, this model should be an improvement on the the Linear SVM model.</p>
 </li>
 </ol>
 
@@ -12188,7 +12189,7 @@ Testing set has 95 samples.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">train_classifier</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
@@ -12261,42 +12262,23 @@ Testing set has 95 samples.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
 
 <span class="c1"># TODO: Initialize the three models</span>
-<span class="n">clf_A</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">clf_B</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">clf_C</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">clf</span> <span class="ow">in</span> <span class="p">[</span><span class="n">LinearSVC</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span> <span class="n">GaussianNB</span><span class="p">(),</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)]:</span>
 
-<span class="c1"># TODO: Set up the training set sizes</span>
-<span class="n">X_train_100</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
-<span class="n">y_train_100</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+    <span class="c1"># TODO: Set up the training set sizes</span>
+    <span class="k">for</span> <span class="n">n_train</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">]:</span>
 
-<span class="n">X_train_200</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
-<span class="n">y_train_200</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
-
-<span class="n">X_train_300</span> <span class="o">=</span> <span class="n">X_train</span>
-<span class="n">y_train_300</span> <span class="o">=</span> <span class="n">y_train</span>
-
-<span class="c1"># TODO: Execute the &#39;train_predict&#39; function for each classifier and each training set size</span>
-<span class="c1"># train_predict(clf, X_train, y_train, X_test, y_test)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_A</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_B</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_100</span><span class="p">,</span> <span class="n">y_train_100</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_200</span><span class="p">,</span> <span class="n">y_train_200</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-<span class="n">train_predict</span><span class="p">(</span><span class="n">clf_C</span><span class="p">,</span> <span class="n">X_train_300</span><span class="p">,</span> <span class="n">y_train_300</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+        <span class="c1"># TODO: Execute the &#39;train_predict&#39; function for each classifier and each training set size</span>
+        <span class="c1"># train_predict(clf, X_train, y_train, X_test, y_test)</span>
+        <span class="n">train_predict</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[:</span><span class="n">n_train</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[:</span><span class="n">n_train</span><span class="p">],</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12309,60 +12291,68 @@ Testing set has 95 samples.
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training a GradientBoostingClassifier using a training set size of 100. . .
-Trained model in 0.0722 seconds
-Made predictions in 0.0008 seconds.
-F1 score for training set: 1.0000.
-Made predictions in 0.0005 seconds.
-F1 score for test set: 0.6557.
-Training a GradientBoostingClassifier using a training set size of 200. . .
-Trained model in 0.0603 seconds
-Made predictions in 0.0007 seconds.
-F1 score for training set: 0.9962.
-Made predictions in 0.0005 seconds.
-F1 score for test set: 0.7385.
-Training a GradientBoostingClassifier using a training set size of 300. . .
-Trained model in 0.0702 seconds
-Made predictions in 0.0011 seconds.
-F1 score for training set: 0.9751.
-Made predictions in 0.0005 seconds.
-F1 score for test set: 0.8029.
-Training a LogisticRegression using a training set size of 100. . .
-Trained model in 0.0021 seconds
-Made predictions in 0.0008 seconds.
-F1 score for training set: 0.8702.
+<pre>Training a LinearSVC using a training set size of 100. . .
+Trained model in 0.0091 seconds
+Made predictions in 0.0470 seconds.
+F1 score for training set: 0.9516.
 Made predictions in 0.0004 seconds.
-F1 score for test set: 0.6720.
-Training a LogisticRegression using a training set size of 200. . .
-Trained model in 0.0030 seconds
-Made predictions in 0.0005 seconds.
-F1 score for training set: 0.8333.
+F1 score for test set: 0.5714.
+Training a LinearSVC using a training set size of 200. . .
+Trained model in 0.0129 seconds
+Made predictions in 0.0002 seconds.
+F1 score for training set: 0.8207.
+Made predictions in 0.0002 seconds.
+F1 score for test set: 0.7742.
+Training a LinearSVC using a training set size of 300. . .
+Trained model in 0.0202 seconds
+Made predictions in 0.0004 seconds.
+F1 score for training set: 0.8165.
+Made predictions in 0.0002 seconds.
+F1 score for test set: 0.8029.
+Training a GaussianNB using a training set size of 100. . .
+Trained model in 0.0006 seconds
+Made predictions in 0.0003 seconds.
+F1 score for training set: 0.4941.
+Made predictions in 0.0003 seconds.
+F1 score for test set: 0.4086.
+Training a GaussianNB using a training set size of 200. . .
+Trained model in 0.0008 seconds
+Made predictions in 0.0003 seconds.
+F1 score for training set: 0.8106.
+Made predictions in 0.0003 seconds.
+F1 score for test set: 0.7500.
+Training a GaussianNB using a training set size of 300. . .
+Trained model in 0.0009 seconds
+Made predictions in 0.0004 seconds.
+F1 score for training set: 0.7855.
 Made predictions in 0.0003 seconds.
 F1 score for test set: 0.7910.
-Training a LogisticRegression using a training set size of 300. . .
-Trained model in 0.0034 seconds
+Training a SGDClassifier using a training set size of 100. . .
+Trained model in 0.0029 seconds
+Made predictions in 0.0002 seconds.
+F1 score for training set: 0.0000.
 Made predictions in 0.0004 seconds.
-F1 score for training set: 0.8075.
-Made predictions in 0.0003 seconds.
-F1 score for test set: 0.8120.
-Training a KNeighborsClassifier using a training set size of 100. . .
-Trained model in 0.0008 seconds
-Made predictions in 0.0018 seconds.
-F1 score for training set: 0.8244.
-Made predictions in 0.0021 seconds.
-F1 score for test set: 0.7519.
-Training a KNeighborsClassifier using a training set size of 200. . .
+F1 score for test set: 0.0000.
+Training a SGDClassifier using a training set size of 200. . .
 Trained model in 0.0007 seconds
-Made predictions in 0.0039 seconds.
-F1 score for training set: 0.8099.
-Made predictions in 0.0032 seconds.
-F1 score for test set: 0.7536.
-Training a KNeighborsClassifier using a training set size of 300. . .
-Trained model in 0.0025 seconds
-Made predictions in 0.0052 seconds.
-F1 score for training set: 0.8491.
-Made predictions in 0.0018 seconds.
-F1 score for test set: 0.7945.
+Made predictions in 0.0002 seconds.
+F1 score for training set: 0.7939.
+Made predictions in 0.0002 seconds.
+F1 score for test set: 0.8415.
+Training a SGDClassifier using a training set size of 300. . .
+Trained model in 0.0007 seconds
+Made predictions in 0.0002 seconds.
+F1 score for training set: 0.8000.
+Made predictions in 0.0002 seconds.
+F1 score for test set: 0.8535.
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/Users/chidinma/anaconda/envs/py2/lib/python2.7/site-packages/sklearn/metrics/classification.py:1074: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 due to no predicted samples.
+  &#39;precision&#39;, &#39;predicted&#39;, average, warn_for)
 </pre>
 </div>
 </div>
@@ -12386,7 +12376,7 @@ F1 score for test set: 0.7945.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong> Classifer 1 - Gradient Boosting</strong></p>
+<p><strong> Classifer 1 - Linear SVM</strong></p>
 <table>
 <thead><tr>
 <th style="text-align:center">Training Set Size</th>
@@ -12399,28 +12389,28 @@ F1 score for test set: 0.7945.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0722s</td>
-<td style="text-align:center">0.0005s</td>
-<td style="text-align:center">1.0000</td>
-<td style="text-align:center">0.6557</td>
+<td style="text-align:center">0.0091s</td>
+<td style="text-align:center">0.0004s</td>
+<td style="text-align:center">0.9516</td>
+<td style="text-align:center">0.5714</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0603s</td>
-<td style="text-align:center">0.0005s</td>
-<td style="text-align:center">0.9962</td>
-<td style="text-align:center">0.7385</td>
+<td style="text-align:center">0.0129s</td>
+<td style="text-align:center">0.0002s</td>
+<td style="text-align:center">0.8207</td>
+<td style="text-align:center">0.7742</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0702s</td>
-<td style="text-align:center">0.0005s</td>
-<td style="text-align:center">0.9751</td>
+<td style="text-align:center">0.0202s</td>
+<td style="text-align:center">0.0002s</td>
+<td style="text-align:center">0.8165</td>
 <td style="text-align:center">0.8029</td>
 </tr>
 </tbody>
 </table>
-<p><strong> Classifer 2 - Logistic Regression</strong></p>
+<p><strong> Classifer 2 - Gaussian Naive Bayes</strong></p>
 <table>
 <thead><tr>
 <th style="text-align:center">Training Set Size</th>
@@ -12433,28 +12423,28 @@ F1 score for test set: 0.7945.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0021s</td>
-<td style="text-align:center">0.0004s</td>
-<td style="text-align:center">0.8702</td>
-<td style="text-align:center">0.6720</td>
+<td style="text-align:center">0.0006s</td>
+<td style="text-align:center">0.0003s</td>
+<td style="text-align:center">0.4941</td>
+<td style="text-align:center">0.4086</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0030s</td>
+<td style="text-align:center">0.0008s</td>
 <td style="text-align:center">0.0003s</td>
-<td style="text-align:center">0.8333</td>
-<td style="text-align:center">0.7910</td>
+<td style="text-align:center">0.8106</td>
+<td style="text-align:center">0.7500</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0034s</td>
+<td style="text-align:center">0.0009s</td>
 <td style="text-align:center">0.0003s</td>
-<td style="text-align:center">0.8075</td>
-<td style="text-align:center">0.8120</td>
+<td style="text-align:center">0.7855</td>
+<td style="text-align:center">0.7910</td>
 </tr>
 </tbody>
 </table>
-<p><strong> Classifer 3 - K-Nearest Neighbors</strong></p>
+<p><strong> Classifer 3 - Linear SVM with Stochastic Gradient Descent</strong></p>
 <table>
 <thead><tr>
 <th style="text-align:center">Training Set Size</th>
@@ -12467,24 +12457,24 @@ F1 score for test set: 0.7945.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0008s</td>
-<td style="text-align:center">0.0021s</td>
-<td style="text-align:center">0.8244</td>
-<td style="text-align:center">0.7519</td>
+<td style="text-align:center">0.0029s</td>
+<td style="text-align:center">0.0004s</td>
+<td style="text-align:center">0.0000</td>
+<td style="text-align:center">0.0000</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
 <td style="text-align:center">0.0007s</td>
-<td style="text-align:center">0.0032s</td>
-<td style="text-align:center">0.8099</td>
-<td style="text-align:center">0.7536</td>
+<td style="text-align:center">0.0002s</td>
+<td style="text-align:center">0.7939</td>
+<td style="text-align:center">0.8415</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0025s</td>
-<td style="text-align:center">0.0018s</td>
-<td style="text-align:center">0.8491</td>
-<td style="text-align:center">0.7945</td>
+<td style="text-align:center">0.0007s</td>
+<td style="text-align:center">0.0002s</td>
+<td style="text-align:center">0.8000</td>
+<td style="text-align:center">0.8535</td>
 </tr>
 </tbody>
 </table>
@@ -12517,7 +12507,7 @@ F1 score for test set: 0.7945.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> I choose logistic regression as the generally most appropriate model of the three that were tested based on the available data, limited resources, cost and performance. Logistic regression had the highest F1 score, a measure of the model's predictive power, on the test set out of the three models after training with 300 observations. While F1 score at 0.8120 is not very high, it is still well above chance in predictive power. It is clear that the model does not capture the full complexity of the data however as the F1 score on the training set was in the mid 80s as well for all three performance tests. But it is clear that the F1 score improves as more training observations become available. Lastly, Logistic Regression performed well among the three models in terms of speed. Logistic Regression had the middle training time but fastest prediction time in comparison to the other two models at each training size.</p>
+<p><strong>Answer: </strong> I choose Linear SVM with Stochastic Gradient Descent as the generally most appropriate model of the three that were tested based on the available data, limited resources, cost and performance. Linear SVM with Stochastic Gradient Descent had the highest F1 score for the 200 and 300 training data size. Even though no F1 score was given for Linear SVM with Stochastic Gradient Descent at the 100 training data size, the other two models had relatively low F1 scores for that training data size as well. F1 score of 0.8535 at 300-level is decent and it is likely that the model would improve with more data. It is clear that the model does not capture the full complexity of the data as oddly the testing F1 score is higher than the training F1 score for the 200 and 300. Lastly, Linear SVM with Stochastic Gradient Descent performed well among the three models in terms of speed, having the best time for the 200 and 300 level.</p>
 
 </div>
 </div>
@@ -12537,7 +12527,8 @@ F1 score for test set: 0.7945.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Logistic Regression models the data by examining the training data and outputting an equation to describe the data. When making a prediction, each input variable in the equation is assigned a coefficient that weights that variable's influence on the outcome. For each observation, the value of each variable also determines the outcome. For binary numeric variables, the value is often either 1 or 0, as is this case with our model. A 0 value will prevent that variable from influencing the outcome for that observation, no matter what the coefficient is. A constant value in the equation anchors the data in linear space.</p>
+<p><strong>Answer: </strong> Linear Support Vector Machines (SVM) with Stochastic Gradient Descent implements two machine learning algorithms. One of the algorithms is Linear SVM which finds the line between the data in linear space such that the data is separated by category as best as possible, optimally all the data of one category is on one side of the line and all the data of the other category is on the other side. So, in this case we would want all the students who passed on one side of the line and all the students who failed on the other side of the line. The other algorithm is Stochastic Gradient Descent. Stochastic Gradient Descent is a way of training the model by randomly picking a point and seeing which change to the model would minimize our error in making a guess about the true category of that point. In this case, each point represents a student.</p>
+<p>Linear SVM with Stochastic Gradient Descent is finding a line that separates the data as best as possible and training in such a way that we randomly pick a point and decide where to move the line based on minimizing the likelihood of making an error about the true category of that point.</p>
 
 </div>
 </div>
@@ -12568,7 +12559,7 @@ F1 score for test set: 0.7945.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
@@ -12576,10 +12567,10 @@ F1 score for test set: 0.7945.
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span>
 
 <span class="c1"># TODO: Create the parameters list you wish to tune</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fit_intercept&#39;</span><span class="p">:[</span><span class="bp">True</span><span class="p">,</span><span class="bp">False</span><span class="p">],</span> <span class="s1">&#39;solver&#39;</span><span class="p">:[</span><span class="s1">&#39;newton-cg&#39;</span><span class="p">,</span> <span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="s1">&#39;sag&#39;</span><span class="p">]}</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;warm_start&#39;</span><span class="p">:[</span><span class="bp">True</span><span class="p">,</span><span class="bp">False</span><span class="p">]}</span>
 
 <span class="c1"># TODO: Initialize the classifier</span>
-<span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="c1"># TODO: Make an f1 scoring function using &#39;make_scorer&#39; </span>
 <span class="n">f1_scorer</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">f1_score</span><span class="p">,</span><span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
@@ -12609,9 +12600,9 @@ F1 score for test set: 0.7945.
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Made predictions in 0.0002 seconds.
-Tuned model has a training F1 score of 0.8064.
+Tuned model has a training F1 score of 0.8000.
 Made predictions in 0.0002 seconds.
-Tuned model has a testing F1 score of 0.8551.
+Tuned model has a testing F1 score of 0.8535.
 </pre>
 </div>
 </div>
@@ -12635,7 +12626,7 @@ Tuned model has a testing F1 score of 0.8551.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> The final model's F1 score is 0.8551. This is an improvement over the untuned model's F1 score of 0.8120.</p>
+<p><strong>Answer: </strong> The final model's F1 score is 0.8535. This is the same as the untuned model's F1 score of 0.8535.</p>
 
 </div>
 </div>
