@@ -12262,7 +12262,7 @@ Based on the diagram here, <a href="http://scikit-learn.org/stable/tutorial/mach
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import the three supervised learning models from sklearn</span>
@@ -12292,19 +12292,19 @@ Based on the diagram here, <a href="http://scikit-learn.org/stable/tutorial/mach
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training a LinearSVC using a training set size of 100. . .
-Trained model in 0.0091 seconds
-Made predictions in 0.0470 seconds.
+Trained model in 0.0106 seconds
+Made predictions in 0.0479 seconds.
 F1 score for training set: 0.9516.
 Made predictions in 0.0004 seconds.
 F1 score for test set: 0.5714.
 Training a LinearSVC using a training set size of 200. . .
-Trained model in 0.0129 seconds
+Trained model in 0.0124 seconds
 Made predictions in 0.0002 seconds.
 F1 score for training set: 0.8207.
 Made predictions in 0.0002 seconds.
 F1 score for test set: 0.7742.
 Training a LinearSVC using a training set size of 300. . .
-Trained model in 0.0202 seconds
+Trained model in 0.0211 seconds
 Made predictions in 0.0004 seconds.
 F1 score for training set: 0.8165.
 Made predictions in 0.0002 seconds.
@@ -12316,13 +12316,13 @@ F1 score for training set: 0.4941.
 Made predictions in 0.0003 seconds.
 F1 score for test set: 0.4086.
 Training a GaussianNB using a training set size of 200. . .
-Trained model in 0.0008 seconds
+Trained model in 0.0007 seconds
 Made predictions in 0.0003 seconds.
 F1 score for training set: 0.8106.
 Made predictions in 0.0003 seconds.
 F1 score for test set: 0.7500.
 Training a GaussianNB using a training set size of 300. . .
-Trained model in 0.0009 seconds
+Trained model in 0.0008 seconds
 Made predictions in 0.0004 seconds.
 F1 score for training set: 0.7855.
 Made predictions in 0.0003 seconds.
@@ -12334,7 +12334,7 @@ F1 score for training set: 0.0000.
 Made predictions in 0.0004 seconds.
 F1 score for test set: 0.0000.
 Training a SGDClassifier using a training set size of 200. . .
-Trained model in 0.0007 seconds
+Trained model in 0.0006 seconds
 Made predictions in 0.0002 seconds.
 F1 score for training set: 0.7939.
 Made predictions in 0.0002 seconds.
@@ -12389,21 +12389,21 @@ F1 score for test set: 0.8535.
 <tbody>
 <tr>
 <td style="text-align:center">100</td>
-<td style="text-align:center">0.0091s</td>
+<td style="text-align:center">0.0106s</td>
 <td style="text-align:center">0.0004s</td>
 <td style="text-align:center">0.9516</td>
 <td style="text-align:center">0.5714</td>
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0129s</td>
+<td style="text-align:center">0.0124s</td>
 <td style="text-align:center">0.0002s</td>
 <td style="text-align:center">0.8207</td>
 <td style="text-align:center">0.7742</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0202s</td>
+<td style="text-align:center">0.0211s</td>
 <td style="text-align:center">0.0002s</td>
 <td style="text-align:center">0.8165</td>
 <td style="text-align:center">0.8029</td>
@@ -12430,14 +12430,14 @@ F1 score for test set: 0.8535.
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0008s</td>
+<td style="text-align:center">0.0007s</td>
 <td style="text-align:center">0.0003s</td>
 <td style="text-align:center">0.8106</td>
 <td style="text-align:center">0.7500</td>
 </tr>
 <tr>
 <td style="text-align:center">300</td>
-<td style="text-align:center">0.0009s</td>
+<td style="text-align:center">0.0008s</td>
 <td style="text-align:center">0.0003s</td>
 <td style="text-align:center">0.7855</td>
 <td style="text-align:center">0.7910</td>
@@ -12464,7 +12464,7 @@ F1 score for test set: 0.8535.
 </tr>
 <tr>
 <td style="text-align:center">200</td>
-<td style="text-align:center">0.0007s</td>
+<td style="text-align:center">0.0006s</td>
 <td style="text-align:center">0.0002s</td>
 <td style="text-align:center">0.7939</td>
 <td style="text-align:center">0.8415</td>
@@ -12527,8 +12527,8 @@ F1 score for test set: 0.8535.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Linear Support Vector Machines (SVM) with Stochastic Gradient Descent implements two machine learning algorithms. One of the algorithms is Linear SVM which finds the line between the data in linear space such that the data is separated by category as best as possible, optimally all the data of one category is on one side of the line and all the data of the other category is on the other side. So, in this case we would want all the students who passed on one side of the line and all the students who failed on the other side of the line. The other algorithm is Stochastic Gradient Descent. Stochastic Gradient Descent is a way of training the model by randomly picking a point and seeing which change to the model would minimize our error in making a guess about the true category of that point. In this case, each point represents a student.</p>
-<p>Linear SVM with Stochastic Gradient Descent is finding a line that separates the data as best as possible and training in such a way that we randomly pick a point and decide where to move the line based on minimizing the likelihood of making an error about the true category of that point.</p>
+<p><strong>Answer: </strong> Linear Support Vector Machines (SVM) with Stochastic Gradient Descent implements two machine learning algorithms. One of the algorithms is Linear SVM which finds the line between the data in linear space such that the data is separated by outcome category as best as possible, optimally all the data of one outcome category is on one side of the line and all the data of the other outcome category is on the other side. We find this line by training on data (health, age, sex, etc) from students who we know passed or failed. If the data is not linearly separable, the SVM may transform the data into higher dimensions so that the outcome categories fall on either side of a hyperplane. So, in this case we would want all the students who passed on one side of the line or hyperplane and all the students who failed on the other side of the line or hyperplane. This line or hyperplane is optimized by the support vectors. The support vectors are the data points closest to the line or hyperplane and the model maximizes the distance from the support vectors to the line or hyperplane to determine the line or hyperplane that best separates the data. Then we use this fitted model to make predictions about other students. We place the student in space and the side of the line or hyperplane that they fall on determines their outcome category.</p>
+<p>The other algorithm being used is Stochastic Gradient Descent. Stochastic Gradient Descent is a way of training the model by randomly picking a point and seeing which change to the model would minimize our error in making a guess about the true outcome category of that point. In this case, each point represents a student that is a support vector, a student that falls close to the line or hyperplane of separation. Linear SVM with Stochastic Gradient Descent is finding a line that separates the data as best as possible and training in such a way that we randomly pick a support vector and decide where to move the line or hyperplane based on minimizing the likelihood of making an error about the true outcome category of that point.</p>
 
 </div>
 </div>
@@ -12559,7 +12559,7 @@ F1 score for test set: 0.8535.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;GridSearchCV&#39; and &#39;make_scorer&#39;</span>
@@ -12567,7 +12567,7 @@ F1 score for test set: 0.8535.
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span>
 
 <span class="c1"># TODO: Create the parameters list you wish to tune</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;warm_start&#39;</span><span class="p">:[</span><span class="bp">True</span><span class="p">,</span><span class="bp">False</span><span class="p">]}</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;warm_start&#39;</span><span class="p">:[</span><span class="bp">True</span><span class="p">,</span><span class="bp">False</span><span class="p">],</span> <span class="s1">&#39;penalty&#39;</span><span class="p">:[</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span><span class="s1">&#39;l2&#39;</span><span class="p">,</span><span class="s1">&#39;elasticnet&#39;</span><span class="p">]}</span>
 
 <span class="c1"># TODO: Initialize the classifier</span>
 <span class="n">clf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -12600,9 +12600,9 @@ F1 score for test set: 0.8535.
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Made predictions in 0.0002 seconds.
-Tuned model has a training F1 score of 0.8000.
+Tuned model has a training F1 score of 0.7984.
 Made predictions in 0.0002 seconds.
-Tuned model has a testing F1 score of 0.8535.
+Tuned model has a testing F1 score of 0.8625.
 </pre>
 </div>
 </div>
@@ -12626,7 +12626,7 @@ Tuned model has a testing F1 score of 0.8535.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> The final model's F1 score is 0.8535. This is the same as the untuned model's F1 score of 0.8535.</p>
+<p><strong>Answer: </strong> The final model's F1 score for training is 0.7984, which is roughly the same as the untune model's training F1 score of 0.8000. The final model's F1 score of 0.8625 is an improvement over the untuned model's testing F1 score of 0.8535.</p>
 
 </div>
 </div>
